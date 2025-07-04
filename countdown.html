@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Countdown Ulang Tahun Nadine</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #000, #000);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      text-align: center;
+      color: #888;
+    }
+
+    h1 {
+      font-size: 1,5em;
+      margin-bottom: 50px;
+    }
+
+    #countdown {
+      font-size: 1.5em;
+      font-weight: bold;
+      background-color: transparent;
+      padding: 20px 30px;
+      border-radius: 90px;
+      box-shadow: none;
+    }
+
+    a {
+      margin-top: 30px;
+      display: inline-block;
+      color: #333;
+      text-decoration: none;
+      font-size: 1em;
+      background-color: #bbbbb;
+      padding: 10px 20px;
+      border-radius: 10px;
+      transition: 0.3s;
+    }
+
+    a:hover {
+      background-color: #bbbb 
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Menuju Ulang Tahun Nadine Tahun Depan🎉</h1>
+  <div id="countdown">Loading...</div>
+  <a href="index.html">⬅️ Kembali ke Halaman Utama</a>
+
+  <script>
+    const targetDate = new Date("July 16, 2026 00:00:00").getTime();
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+
+      if (distance <= 0) {
+        document.getElementById("countdown").innerText = "Selamat Ulang Tahun Nadine Yang ke 19 dari Zalfa Tahun 2025 🥳";
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById("countdown").innerText =
+        `${days}h ${hours}j ${minutes}m ${seconds}d`;
+    }
+
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+  </script>
+
+</body>
+</html>

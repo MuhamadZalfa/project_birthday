@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Happy Birthday Nadine!</title>
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f0f0f0;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    /* LOGIN */
+    #passwordContainer {
+      background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1950&q=80') no-repeat center center fixed;
+      background-size: cover;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+    }
+
+    #loginBox {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 30px;
+      border-radius: 15px;
+      text-align: center;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+      width: 90%;
+      max-width: 350px;
+    }
+
+    #loginBox h2 {
+      margin-bottom: 20px;
+      font-size: 1.5em;
+      color: #333;
+    }
+
+    input[type="password"] {
+      padding: 12px;
+      width: 100%;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      font-size: 1em;
+    }
+    #petunjukPassword {
+  font-size: 0.9em;
+  color: #666;
+  margin-top: -10px;
+  margin-bottom: 10px;
+}
+
+    button {
+      padding: 12px 20px;
+      border: none;
+      border-radius: 10px;
+      background-color: #073546;
+      color: white;
+      font-size: 1em;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    #pesanSalah {
+      color: red;
+      margin-top: 10px;
+      display: none;
+    }
+
+    /* HALAMAN UTAMA */
+    #mainContent { display: none; text-align: center; padding-bottom: 80px; }
+  
+    h1 {
+      font-size: 2.5em;
+      margin-top: 40px;
+      animation: fadeIn 2s ease-in-out;
+      color: #222;
+    }
+
+    p {
+      font-size: 1.2em;
+      margin: 20px;
+      animation: fadeIn 3s ease-in-out;
+      color: #444;
+    }
+
+    img {
+      width: 230px;
+      border-radius: 20px;
+      margin-top: 20px;
+      border: 4px solid #ccc;
+      animation: fadeIn 2.5s ease-in-out;
+    }
+
+    #btnRahasia {
+      margin-top: 30px;
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 10px;
+      background-color: #073546;
+      color: white;
+      cursor: pointer;
+      animation: fadeIn 4s ease-in-out;
+    }
+
+    #pesanRahasia, .galeri, .popup, .confetti, .heart {
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    #pesanRahasia {
+      display: none;
+      font-size: 1.2em;
+      margin: 20px auto;
+      background: #f9f9f9;
+      padding: 12px;
+      border-radius: 10px;
+      color: #555;
+      max-width: 500px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    }
+
+    .galeri {
+      display: none;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      margin: 20px;
+    }
+
+    .galeri img {
+      width: 130px;
+      height: 130px;
+      object-fit: cover;
+      border-radius: 12px;
+      border: 3px solid #ddd;
+      cursor: pointer;
+    }
+
+    .popup {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.8);
+      justify-content: center;
+      align-items: center;
+      z-index: 998;
+    }
+
+    .popup img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 15px;
+      border: 4px solid white;
+    }
+
+    .credit {
+      font-size: 0.7em;
+      color: #888;
+      font-style: italic;
+      margin-top: 60px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* Hati & Confetti */
+    .heart, .confetti {
+      position: absolute;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .heart {
+      width: 60px;
+      height: 60px;
+      background-color: red;
+      transform: rotate(45deg);
+      top: -60px;
+      animation: fall 6s linear forwards;
+      opacity: 0.8;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: "";
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      background-color: red;
+      border-radius: 50%;
+    }
+
+    .heart::before { top: -30px; left: 0; }
+    .heart::after { left: -30px; top: 0; }
+
+    @keyframes fall {
+      to {
+        transform: translateY(120vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+#btnMini {
+  position: fixed;
+  bottom: 10px;
+  left: 20px;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background-color: transparent !important;
+  color: white !important;
+  font-size: 16px;
+  display: flex;               /* NEW */
+  align-items: center;         /* NEW - vertical center */
+  justify-content: center;     /* NEW - horizontal center */
+  padding: 0;                  /* NEW - remove extra space */
+  border: none;
+  box-shadow: none;
+  cursor: pointer;
+  z-index: 1;
+  transition: transform 0.2s ease;
+}
+
+#btnMini:hover {
+  transform: scale(1.1);
+}
+#btnCountdown {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background-color: #transparent; /* pink */
+  color: white;
+  font-size: 20px;
+  border: none;
+  box-shadow: none;
+  cursor: pointer;
+  z-index: 1000;
+  transition: transform 0.2s ease;
+}
+
+#btnCountdown:hover {
+  transform: scale(1.1);
+}
+
+    .confetti {
+      width: 10px;
+      height: 10px;
+      background-color: yellow;
+      top: -10px;
+      animation: confettiFall 4s infinite linear;
+      opacity: 0.9;
+      border-radius: 50%;
+    }
+
+    @keyframes confettiFall {
+      0% { transform: translateY(0) rotate(0deg); }
+      100% { transform: translateY(100vh) rotate(360deg); }
+      
+#btnMini {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background-color: hotpink !important;
+  color: white !important;
+  font-size: 16px;
+  display: flex;               /* NEW */
+  align-items: center;         /* NEW - vertical center */
+  justify-content: center;     /* NEW - horizontal center */
+  padding: 0;                  /* NEW - remove extra space */
+  border: none;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  cursor: pointer;
+  z-index: 999;
+  transition: transform 0.2s ease;
+}
+
+#btnMini:hover {
+  transform: scale(1.1);
+}
+  </style>
+</head>
+<body>
+
+  <!-- LOGIN -->
+  <div id="passwordContainer">
+    <div id="loginBox">
+      <h2>Masukkan Password</h2>
+      <input type="password" id="passwordInput" placeholder="Password rahasia" autocomplete="off" />
+ <!-- Tambahan ini -->
+<button onclick="cekPassword()">Masuk</button>
+<p id="pesanSalah">Password salah, coba lagi ya!</p>
+    </div>
+  </div>
+
+  <!-- KONTEN UTAMA -->
+  <div id="mainContent">
+<h1 id="typingText"></h1>
+    <h1 id="typingNama"></h1>
+    <img src="https://raw.githubusercontent.com/MuhamadZalfa/image-zalfa/main/nadine.jpg" alt="Foto Nadine" />
+
+    <p>16-07-2007 hehehehehe &lt;3 <br>
+      In a noisy world, you are the calm.<br>
+      In a gray world, you bring color.<br>
+      Happy birthday. Keep growing into someone you're proud to be. 🥳</p>
+
+    <button id="btnRahasia" onclick="tampilkanPesan()">🎁 Tekan Khusus Nadine</button>
+  
+  <a href="countdown.html" 
+   style="display:inline-block; margin-top:15px; text-decoration:none; font-weight:bold; color:#073546;">
+   
+</a>
+  
+    <div id="pesanRahasia">
+      Nadine, Thank you for coming into my life, understanding my current situation.<br>
+      Thank you for your attention, your love, your sincere feelings.<br><br>
+      Thank you for accepting all my shortcomings.<br><br>
+      I apologize for not being able to give a birthday present, because this is not a present, just a token of gratitude.<br>
+      Happy birthday, Nadine. You matter. You’re appreciated. Once again, thank you for being born ❤️
+    </div>
+
+    <div class="galeri" id="galeri">
+      <img src="https://raw.githubusercontent.com/MuhamadZalfa/foto1/main/1751648898342.jpg" onclick="tampilPopup(this)">
+      <img src="https://raw.githubusercontent.com/MuhamadZalfa/foto1/main/IMG-20250512-WA0055.jpg" onclick="tampilPopup(this)">
+      <img src="https://raw.githubusercontent.com/MuhamadZalfa/foto1/main/IMG-20250428-WA0092.jpg" onclick="tampilPopup(this)">
+    </div>
+
+    <div class="popup" id="popupGambar" onclick="tutupPopup()">
+      <img id="gambarPopup" src="">
+    </div>
+
+    <div class="credit">Made with ❤️ by Muhamad Zalfa</div>
+  </div>
+  
+<div id="miniSurprise" style="display:none; font-size:1em; margin-top:40px; color:#333;">
+  Hehehe... sorry ya aku bikin ginian, sambil belajar jugaa 🙈<br>
+  <strong>hbd ya sayang! 😳</strong>
+</div>
+  <!-- MUSIK -->
+  <audio id="musik" loop>
+    <source src="https://raw.githubusercontent.com/MuhamadZalfa/song-fix/main/Coldplay%20-%20Fix%20You%20(Best%20part%20altered%20solo%20guitar%20w%20tour%20clips).mp3" type="audio/mp3">
+  </audio>
+
+  <script>
+    function cekPassword() {
+  const input = document.getElementById("passwordInput").value;
+  const benar = "nadine16";
+  const pesanSalah = document.getElementById("pesanSalah");
+
+  if (input === benar) {
+  document.getElementById("passwordContainer").style.display = "none";
+  document.getElementById("mainContent").style.display = "block";
+  const musik = document.getElementById("musik");
+  musik.play().catch(err => console.log("Autoplay gagal:", err));
+  buatHati();
+  buatConfetti();
+  ketikTeks("Happy Birthday!!", "typingText");
+  setTimeout(() => {
+    ketikTeks("Nadine Ghaesa Putri Darmawan 🎂", "typingNama", 80);
+  }, 1500); // muncul setelah judul selesai diketik
+
+
+  } else {
+    pesanSalah.innerText = "Password salah, coba lagi ya! wkwk 😅";
+    pesanSalah.style.display = "block";
+  }
+}
+
+    function tampilkanPesan() {
+      document.getElementById("pesanRahasia").style.display = "block";
+      document.getElementById("galeri").style.display = "flex";
+    }
+
+    function tampilPopup(img) {
+      const popup = document.getElementById("popupGambar");
+      const gambar = document.getElementById("gambarPopup");
+      gambar.src = img.src;
+      popup.style.display = "flex";
+    }
+
+    function tutupPopup() {
+      document.getElementById("popupGambar").style.display = "none";
+    }
+
+    function buatHati() {
+      for (let i = 0; i < 20; i++) {
+        let heart = document.createElement("div");
+        heart.className = "heart";
+        heart.style.left = Math.random() * window.innerWidth + "px";
+        heart.style.animationDelay = (Math.random() * 5) + "s";
+        document.body.appendChild(heart);
+      }
+    }
+
+    function buatConfetti() {
+      for (let i = 0; i < 30; i++) {
+        let confetti = document.createElement("div");
+        confetti.className = "confetti";
+        confetti.style.left = Math.random() * window.innerWidth + "px";
+        confetti.style.backgroundColor = ["#fcd34d", "#34d399", "#60a5fa", "#f472b6", "#f87171"][Math.floor(Math.random() * 5)];
+        confetti.style.animationDuration = (3 + Math.random() * 2) + "s";
+        confetti.style.width = confetti.style.height = (5 + Math.random() * 10) + "px";
+        document.body.appendChild(confetti);
+      }
+    }
+
+  // Fungsi Efek Mengetik
+  function ketikTeks(teks, elemenId, kecepatan = 100) {
+    let i = 0;
+    const target = document.getElementById(elemenId);
+    target.innerHTML = "";
+
+    const interval = setInterval(() => {
+      target.innerHTML += teks.charAt(i);
+      i++;
+      if (i === teks.length) clearInterval(interval);
+    }, kecepatan);
+  }
+  function tampilMiniSurprise() {
+  const surprise = document.getElementById("miniSurprise");
+  surprise.style.display = "block";
+  surprise.scrollIntoView({ behavior: 'smooth' });
+
+  surprise.animate([
+    { transform: 'scale(1)' },
+    { transform: 'scale(1.05)' },
+    { transform: 'scale(1)' }
+  ], {
+    duration: 500,
+    easing: 'ease-in-out'
+  });
+}
+</script>
+  </script>
+<!-- Tombol Bulat Mini di Kiri Bawah -->
+<button id="btnMini" onclick="tampilMiniSurprise()">🎁</button>
+
+<!-- Tombol Countdown Kecil di Kanan -->
+<button onclick="window.location.href='countdown.html'" id="btnCountdown">⏳</button>
+</body>
+</html>
